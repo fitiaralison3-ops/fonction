@@ -4,7 +4,7 @@
 #define PI 3.14159265
 
 // Prototypes
-void choix ( );
+void choix ( int nbr, char *par[ ]) );
 void accueil ( );
 float degre4 (float a, float b, float c, float d, float e, float x);
 float lnep ( int z, int op,float a, float b, float x);
@@ -40,63 +40,62 @@ void choix (int nbr, char *par[ ] )
       int z, var, op;
       if (nbr==8 && atoi (par[1])== -1)
         {
-             float a= atoi (par[2]);
-             float b= atoi (par[3]);
-             float c= atoi (par[4]);
-            float d= atoi (par[5]);             
-             float e= atoi (par[6]);
-             float x= atoi (par[7]);
+             float a= atof (par[2]);
+             float b= atof (par[3]);
+             float c= atof (par[4]);
+            float d= atof (par[5]);             
+             float e= atof (par[6]);
+             float x= atof (par[7]);
              degre4 (a, b, c, d, e, x);
         }
       else if (nbr==7 && atoi (par[1]) == -2)
           {
               z=atoi (par[2]);
               op=atoi (par[3]);
-              float a= atoi (par[4]);
-              float b= atoi (par[5]);
-              float x= atoi (par[6]);
+              float a= atof (par[4]);
+              float b= atof (par[5]);
+              float x= atof (par[6]);
               lnep (z, op, a, b, x);
           }
       else if (nbr==5 &&  atoi (par[1])==-3)
           {
-             float a= atoi (par[2]);
-             float b= atoi (par[3]);
-             float x= atoi (par[4]);
+             float a= atof (par[2]);
+             float b= atof (par[3]);
+             float x= atof (par[4]);
             expo (a, b, x);
           }
       else if (nbr==6 && atoi (par[1])==-4)
           {
               op= atoi (par[2]);
-              float a= atoi (par[3]);
-               float b= atoi (par[4]);
-               float x= atoi (par[5]);
+              float a= atof (par[3]);
+               float b= atof (par[4]);
+               float x= atof (par[5]);
               racine ( op, a, b,  x);
           }
       else if  (nbr==6 && atoi ( par[1])==-5)
           {
               z= atoi (par[2]);
               var= atoi (par[3]);
-              float a= atoi (par[4]);
-             float b= atoi (par[5]);
-            float k= atoi (par[6]);             
-             float x= atoi (par[7]);
+              float a= atof (par[4]);
+             float b= atof (par[5]);
+            float k= atof (par[6]);             
+             float x= atof (par[7]);
               trigo ( z, var, a, b, k, x);
           }
       else if (nbr==5 &&  atoi (par[1])==-6)
           {
-                float a= atoi (par[2]);
-               float b= atoi (par[3]);
-               float x= atoi (par[4]);  
+                float a= atof (par[2]);
+               float b= atof (par[3]);
+               float x= atof (par[4]);  
               valabs ( a, b, x) ;
           }
       else if (nbr==8 && atoi ( par[1] )==-7)
           {
-              op = atoi (par[2]);
-              float a= atoi (par[3]);
-              float n= atoi (par[4]);
-              float b= atoi (par[5]);             
-              float c= atoi (par[6]);
-              float x= atoi (par[7]);
+              op = atoi
+              float a = atof (par[4]);
+              float b= atof (par[5]);             
+              float c= atof (par[6]);
+              float x= atof (par[7]);
               puissance ( op, a, n,  b, c,  x);
           }
       else
