@@ -1,0 +1,290 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#define PI 3.14159265
+
+// Prototypes
+void choix ( int nbr, char *par[ ]) ;
+void accueil ( );
+float degre4 (float a, float b, float c, float d, float e, float x);
+float lnep ( int z, int op,float a, float b, float x);
+float expo (float a, float b, float x);
+float racine ( int op, float a, float b, float x);
+float trigo (int z,  int var, float a, float b, float k, float x );
+float valabs (float a, float b, float x);
+float puissance ( int op, float a, float n, float b, float c, float x);
+
+// Definition de fonction
+void accueil (  )
+  {
+    printf (".................................................................................................................................................\n");
+    printf ("    CALCUL   DE   FONCTIONS   MATHÉMATIQUES\n\n");
+    printf ("....    ....    ....    ....    ....    ....    ....    ....    ....    ....\n\n");
+    printf ("\nVeuillez choisir un chiffre pour chaque calcul que vous voulez effectuer\n");
+    printf ("\nVoici les calculs que vous pouvez faire :\n\n");
+    printf ("-1==Equation de degré 4 maximum\n\n");
+    printf ("-2==Logarithme (0 pour log et -1 pour ln) : log/ln (a*x+b) ou log/ln |a*x+b|\n-1 pour les valeurs absolues et 0 pours les valeurs simples\n\n");
+    printf ("-3==Exponentielle: e^(a*x+b)\n\n");
+    printf ("-4==racine carrée :  racine(a*x+b) ou  racine |a*x+b|\n-1 pour les valeurs absolues et 0 pour les simples\n\n");
+    printf ("-5==Fonctions trigonométriques : Radian / Degre  sin/cos/tan/asn/acs/atn (a*x+b+k) \n-1 pour sin, -2 pour cos, -3 pour tan, -4 pour asin, -5 pour acos et -6 pour atan\n\n");
+    printf ("-6==Valeur absolue : |a*x+b|\n\n");
+    printf ("-7==Puissance : 0 pour a*(x^b)+c, -1 a^x+b ou  -2 (a*x)^n\n\n");
+    printf ("Seuls les calculs dan R sont pris en compte\n");
+    printf ("Les calculs non indiqués ici sont non pris en compte\n");
+    printf ("Choisissez le type de calcul que vous voulez, en tapant le numero correspondant\n");
+    printf (".................................................................................................................................................\n");
+  } 
+
+void choix (int nbr, char *par[ ] )
+  {
+      int z, var, op;
+      if (nbr==8 && atoi (par[1])== -1)
+        {
+             float a= atof (par[2]);
+             float b= atof (par[3]);
+             float c= atof (par[4]);
+            float d= atof (par[5]);             
+             float e= atof (par[6]);
+             float x= atof (par[7]);
+             degre4 (a, b, c, d, e, x);
+        }
+      else if (nbr==7 && atoi (par[1]) == -2)
+          {
+              z=atoi (par[2]);
+              op=atoi (par[3]);
+              float a= atof (par[4]);
+              float b= atof (par[5]);
+              float x= atof (par[6]);
+              lnep (z, op, a, b, x);
+          }
+      else if (nbr==5 &&  atoi (par[1])==-3)
+          {
+             float a= atof (par[2]);
+             float b= atof (par[3]);
+             float x= atof (par[4]);
+            expo (a, b, x);
+          }
+      else if (nbr==6 && atoi (par[1])==-4)
+          {
+              op= atoi (par[2]);
+              float a= atof (par[3]);
+               float b= atof (par[4]);
+               float x= atof (par[5]);
+              racine ( op, a, b,  x);
+          }
+      else if  (nbr==8 && atoi ( par[1])==-5)
+          {
+              z= atoi (par[2]);
+              var= atoi (par[3]);
+              float a= atof (par[4]);
+             float b= atof (par[5]);
+            float k= atof (par[6]);             
+             float x= atof (par[7]);
+              trigo ( z, var, a, b, k, x);
+          }
+      else if (nbr==5 &&  atoi (par[1])==-6)
+          {
+                float a= atof (par[2]);
+               float b= atof (par[3]);
+               float x= atof (par[4]);  
+              valabs ( a, b, x) ;
+          }
+      else if (nbr==8 && atoi ( par[1] )==-7)
+          {
+              op = atoi (par[2]);
+              int n = atoi(par[3]);
+              float a = atof (par[4]);
+              float b= atof (par[5]);             
+              float c= atof (par[6]);
+              float x= atof (par[7]);
+              puissance ( op, a, n,  b, c,  x);
+          }
+      else
+          {
+              accueil ( );
+          }
+  }
+  
+  float degre4 (float a, float b, float c, float d, float e, float x)
+  {
+    float resultat = a*pow(x,4)+b*pow(x,3)+c*pow(x,2)+d*x+e;
+    printf ("Le résultat est %.2f",resultat);
+    return (resultat);
+  }
+  
+  float lnep ( int z, int op,float a, float b, float x)
+  {
+    float calcul = a*x+b;
+    float resultat;
+    if (z== -1) // logaithme neperien
+      {
+          if (op== -1)// avec valeur absolue
+           {
+             resultat = log(fabs(calcul));
+            return (resultat);
+           }
+        else if (op==0) // sans valeur absolue
+          {
+            if (calcul<=0)
+              {
+                printf ("Erreur");
+                return (0);
+              }
+            else
+              {
+                resultat = log(calcul);
+                printf ("Le résultat est %f", resultat);
+                return (resultat);
+              }
+          }
+      }
+    else if (z== 0) // logarithme base 10
+      {
+        if (op== -1) // avec valeur absolue
+           {
+             resultat = log10(fabs(calcul));
+            return (resultat);
+           }
+        else if (op==0) // sans valeur absolue
+          {
+            if (calcul<=0)
+              {
+                printf ("Erreur");
+                return (0);
+              }
+            else
+              {
+                resultat = log10(calcul);
+                printf ("Le résultat est %f", resultat);
+                return (resultat);
+              }
+          } 
+      }
+  }
+
+float expo (float a, float b, float x)
+  {
+    float puissance = a*x+b;
+    float resultat = exp(puissance);
+    printf ("Le resultat est %f", resultat);
+    return (resultat);
+  }
+  
+  float racine ( int op, float a, float b, float x)
+  {
+    float resultat, calcul = a*x+b;
+    if (op== -1) // avec valeur absolue
+      {
+        resultat = sqrt(fabs(calcul));
+        printf ("Le resultat est %f",resultat);
+        return (resultat);
+      }
+     else if (op== -2) // sans valeur absolue
+        {
+          if (calcul >=0)
+            {
+               resultat = sqrt (calcul);
+               printf ("Le resultat est %f",resultat);
+               return (resultat);
+            }
+        else
+          {
+            printf ("Erreur");
+             return (0);
+         }        
+      }
+    else
+      {
+        printf ("Calcul non pris en compte\n");
+        return (0);
+      }
+  }
+  
+// Fonction trigo
+float trigo ( int z, int var, float a, float b, float k, float x)
+  { 
+    float rad, calcul, resultat;
+    float kajy = (a*x+b);
+    if (z== 0) // calcul en dedre
+      {
+         calcul=kajy*PI/180;
+      }
+    else if (z== -1) // calcul en radian
+      {
+        calcul=kajy;
+      }
+    if (var== -1) // sin
+      {
+        resultat=k+sin(calcul);
+        printf ("Le resultat est %.2f",resultat);
+      }
+    else if (var== -3) // tan
+      {
+        resultat=k+tan(calcul);
+        printf ("Le resultat est %.2f",resultat);
+      }
+    else if (var== -2) // cos
+      {
+        resultat=k+cos(calcul);
+        printf ("Le resultat est %.2f",resultat);
+      }
+    else if (var== -4) // asin
+      {
+        resultat=k+asin(calcul);
+        printf ("Le resultat est %.2f",resultat);
+      }
+    else if (var== -6) // atan
+      {
+        resultat=k+atan(calcul);
+        printf ("Le resultat est %.2f",resultat);
+      }
+    else if (var== -5) // acos
+      {
+        resultat=k+acos(calcul);
+        printf ("Le resultat est %.2f",resultat);
+      }
+    return (resultat);
+  }
+  
+  //valeur absolue
+float valabs (float a, float b, float x)
+  {
+    float calcul = a*x+b, resultat;
+    resultat = fabs(calcul);
+    printf ("Le resultat est %.2f",resultat);
+    return (resultat);
+  }
+  
+  // puissance
+float puissance ( int op, float a, float n, float b, float c, float x)
+{
+  if (op== -1) // a*(x^b)+c
+    {
+      float resultat = a * pow(x, b) + c;
+      printf("Le résultat est %.2f", resultat);
+      return (resultat);
+    }
+  else if (op== -2) // a^x +b
+    {
+      float calcul=pow(a, x),resultat=calcul+b;
+      printf("Le résultat est %.2f", resultat);
+      return (resultat);  
+    }
+  else if (op== -3)// (a^x)^n
+    {
+      float resultat = pow(a,x*n);
+      printf("Le résultat est %.2f", resultat);
+      return (resultat);
+    }
+  else
+    {
+      printf ("Erreur: calcul non pris en compte");
+      return (0);
+    }
+}
+
+int main (int nbr, char *par [ ])
+  {
+    choix(nbr, par);
+    return (0);
+  }
